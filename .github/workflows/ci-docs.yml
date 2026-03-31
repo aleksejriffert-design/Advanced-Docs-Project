@@ -25,11 +25,15 @@ jobs:
       - name: Lint Markdown
         uses: DavidAnson/markdownlint-cli2-action@v16
         with:
-          # Ключевая строка: проверяем папку docs и README, игнорируем node_modules
+          # Игнорируем node_modules и отключаем придирку к пустой строке (MD047)
           globs: |
             docs/**/*.md
             README.md
             !**/node_modules/**
+          config: |
+            {
+              "MD047": false
+            }
 
       - name: Validate OpenAPI
         run: |

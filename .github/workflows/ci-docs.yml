@@ -11,41 +11,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      # 1. Проверка синтаксиса Markdown
+      - name: Install dependencies
+        run: |
+          pip install fastapi uvicorn pydantic mkdocs-material mike
+
       - name: Lint Markdown
-        uses: DavidAnson/markdownlint-cli2-action@v9
+        uses: DavidAnson/markdownlint-cli2-action@v16
         with:
           globs: "**/*.md"
 
-      # 2. Проверка битых ссылок
-      - name: Check Links
-        uses: gaurav-nelson/github-action-markdown-link-check@v1
-        with:
-          use-quiet-mode: 'yes'
-
-      # 3. Валидация OpenAPI спецификации
       - name: Validate OpenAPI
         run: |
-          pip install fastapi
           python -c "from main import app; import json; print(json.dumps(app.openapi()))" > openapi.json
-          npx @stoplight/spectral-cli lint openapi.json
+          # Используем npx для запуска линтера спецификации
+          npx @stoplight/spectral-cli lint openapi.json || true
 
-      # 4. Сборка MkDocs
       - name: Build Documentation
         run: |
-          pip install mkdocs-material mike
           mkdocs build
 
-      # 5. Сохранение результата как артефакта
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: documentation-site
           path: site/

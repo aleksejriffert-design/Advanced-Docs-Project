@@ -1,0 +1,19 @@
+site:
+  title: Портал документации
+  url: https://example.com
+  start_page: manual::index.adoc
+
+content:
+  sources:
+    - url: ./docs-module-a
+      branches: HEAD
+    - url: ./docs-module-b
+      branches: HEAD
+
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+
+output:
+  dir: ./build/site

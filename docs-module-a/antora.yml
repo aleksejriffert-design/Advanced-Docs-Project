@@ -1,0 +1,5 @@
+name: auth-module
+title: Модуль Авторизации
+version: '1.0'
+nav:
+  - modules/ROOT/nav.adoc

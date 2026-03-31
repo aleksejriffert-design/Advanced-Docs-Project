@@ -1,0 +1,16 @@
+site_name: LibraryAPI Portal
+theme:
+  name: material
+  language: ru
+  palette:
+    primary: indigo
+    accent: indigo
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - content.code.copy
+
+# Это критично для работы переключателя версий
+extra:
+  version:
+    provider: mike

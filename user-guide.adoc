@@ -1,0 +1,39 @@
+= Руководство пользователя LibraryAPI
+:product-version: 2.1.0
+:source-highlighter: highlight.js
+:toc: left
+:icons: font
+
+== Обзор системы
+Вы используете версию API: {product-version}. Данная документация описывает методы интеграции.
+
+== Установка
+Для работы с библиотекой в проекте на C#, выполните:
+
+[source,csharp]
+----
+// Инициализация сервиса
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddLibraryApi(options => {
+        options.Version = "{product-version}";
+    });
+}
+----
+
+== Технический стек
+Ниже приведены требования к окружению:
+
+[cols="2,1,3", options="header"]
+|===
+| Компонент | Версия | Примечание
+| .NET Core | 6.0+   | Основная платформа
+| PostgreSQL| 14     | Хранилище данных
+| Docker    | Latest | Для контейнеризации
+|===
+
+NOTE: Это примечание выделено синим цветом в итоговом документе.
+
+WARNING: Внимание! Перед обновлением до {product-version} сделайте бэкап БД.
+
+TIP: Используйте `docker-compose up` для быстрого старта.
